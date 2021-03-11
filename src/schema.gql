@@ -1,0 +1,96 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Answer {
+  _id: String!
+  surveyId: String!
+  userAnswers: [UserAnswer!]!
+}
+
+input CreateAnswerInput {
+  surveyId: String!
+  userAnswers: [UserAnswerInput!]!
+}
+
+input CreateSurveyInput {
+  format: SurveyFormat!
+  questions: [String!]!
+  title: String!
+  type: SurveyType!
+}
+
+input ListAnswersInput {
+  surveyId: String
+}
+
+input ListSurveyInput {
+  title: String
+}
+
+type Mutation {
+  createAnswer(payload: CreateAnswerInput!): Answer!
+  createSurvey(payload: CreateSurveyInput!): Survey!
+  deleteSurvey(_id: String!): Survey!
+  updateSurvey(payload: UpdateSurveyInput!): Survey!
+}
+
+type Query {
+  answer(id: String!): Answer!
+  answers(filters: ListAnswersInput): [Answer!]!
+  question(id: String!): Question!
+  survey(id: String!): Survey!
+  surveys(filters: ListSurveyInput): [Survey!]!
+}
+
+type Question {
+  _id: String!
+  body: String!
+  surveyId: String!
+  type: QuestionType!
+}
+
+enum QuestionType {
+  CHECKBOX
+  DATE_TIME
+  MULTIPLE_CHOISE
+  SINGLE_TEXT
+  STAR
+}
+
+type Survey {
+  _id: String!
+  format: SurveyFormat!
+  questions(populate: Boolean!): [Question!]!
+  title: String!
+  type: SurveyType!
+  userId: String!
+}
+
+enum SurveyFormat {
+  OWN_CONTACTS
+  TARGETED
+}
+
+enum SurveyType {
+  CLASSIC
+  ONE_AT_TIME
+}
+
+input UpdateSurveyInput {
+  _id: String!
+  format: SurveyFormat!
+  questions: [String!]
+  title: String!
+  type: SurveyType!
+}
+
+type UserAnswer {
+  questionId: String!
+  values: [String!]!
+}
+
+input UserAnswerInput {
+  questionId: String!
+  values: [String!]!
+}
